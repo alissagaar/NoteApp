@@ -3,6 +3,7 @@ import { useMemo } from 'react'
 import { Container } from 'react-bootstrap'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import NewNote from './Components/NewNote'
+import NoteList from './Components/NoteList'
 import { useLocalStorage } from './useLocalStorage'
 import { v4 as uuidV4 } from 'uuid'
 
@@ -54,7 +55,7 @@ function App() {
   return (
     <Container className='my-4'>
       <Routes>
-        <Route path='/' element={<h1>Hi</h1>} />
+        <Route path='/' element={<NoteList />} />
         <Route path='/new' element={<NewNote onSubmit={onCreateNote} onAddTag={addTag} availableTags={tags} />} />
         <Route path='/:id'>
           <Route index element={<h1>Show</h1>} />

@@ -26,7 +26,7 @@ function Note() {
             </Col>
             <Col xs='auto'>
                 <Stack gap={2} direction='horizontal'>
-                    <Link to={`${note.id}/edit`}>
+                    <Link to={`/${note.id}/edit`}>
                         <Button variant="primary">Edit</Button>
                     </Link>
                     <Button variant="outline-danger">Delete</Button>

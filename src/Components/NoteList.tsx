@@ -14,15 +14,19 @@ type SimplifiedNote = {
 type NoteListProps = {
     availableTags: Tag[]
     notes: SimplifiedNote[]
+    onUpdateTag: (id:string, label:string) => void
+    onDeleteTag: (id:string) => void
 }
 
 type EditTagsModalProps = {
     availableTags: Tag[]
     show: boolean
     handleClose: () => void
+    onUpdateTag: (id:string, label:string) => void
+    onDeleteTag: (id:string) => void
 }
 
-function NoteList({availableTags, notes}: NoteListProps) {
+function NoteList({availableTags, notes, onUpdateTag, onDeleteTag}: NoteListProps) {
   const [selectedTags, setSelectedTags] = useState<Tag[]>([])
   const [title, setTitle] = useState('')
 
@@ -83,7 +87,7 @@ function NoteList({availableTags, notes}: NoteListProps) {
                 </Col>
             ))}
         </Row>
-        <EditTagsModal show={editTagsModalIsOpen} handleClose={()=>setEditTagsModalIsOpen(false)} availableTags={availableTags} />
+        <EditTagsModal onUpdateTag={onUpdateTag} onDeleteTag={onDeleteTag} show={editTagsModalIsOpen} handleClose={()=>setEditTagsModalIsOpen(false)} availableTags={availableTags} />
     </>
   )
 }
@@ -112,7 +116,7 @@ function NoteCard({id, title, tags}: SimplifiedNote) {
     </Card>)
 }
 
-function EditTagsModal({show, handleClose, availableTags}: EditTagsModalProps){
+function EditTagsModal({show, handleClose, availableTags, onUpdateTag, onDeleteTag}: EditTagsModalProps){
     return(
         <Modal show={show} onHide={handleClose} >
             <Modal.Header closeButton>
